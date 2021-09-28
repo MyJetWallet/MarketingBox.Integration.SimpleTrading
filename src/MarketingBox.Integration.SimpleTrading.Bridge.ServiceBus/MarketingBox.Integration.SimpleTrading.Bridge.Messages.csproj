@@ -1,0 +1,22 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <TargetsForTfmSpecificBuildOutput>
+      $(TargetsForTfmSpecificBuildOutput);PackReferencedProjectOutputs
+    </TargetsForTfmSpecificBuildOutput>
+    <PackageId>MarketingBox.Integration.Service.Messages</PackageId>
+    <Authors>MyJetWallet</Authors>
+    <Company>MyJetWallet</Company>
+    <Product>MarketingBox</Product>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MyJetWallet.Sdk.Service" Version="1.5.5" />
+    <PackageReference Include="MyJetWallet.Sdk.ServiceBus" Version="1.0.3" />
+  </ItemGroup>
+
+</Project>
