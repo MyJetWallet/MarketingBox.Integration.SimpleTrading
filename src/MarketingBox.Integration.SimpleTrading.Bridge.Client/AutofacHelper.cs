@@ -11,7 +11,7 @@ namespace MarketingBox.Integration.SimpleTrading.Bridge.Client
         {
             var factory = new IntegrationServiceClientFactory(grpcServiceUrl);
 
-            builder.RegisterInstance(factory.GetPartnerService()).As<IIntegrationService>().SingleInstance();
+            builder.RegisterInstance(factory.GetPartnerService()).As<IBridgeService>().SingleInstance();
         }
     }
 }

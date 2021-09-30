@@ -5,9 +5,9 @@ using MarketingBox.Integration.SimpleTrading.Bridge.Grpc.Models.Leads.Contracts;
 namespace MarketingBox.Integration.SimpleTrading.Bridge.Grpc
 {
     [ServiceContract]
-    public interface IIntegrationService
+    public interface IBridgeService
     {
         [OperationContract]
-        Task<LeadCreateResponse> CreateAsync(LeadCreateRequest request);
+        Task<RegistrationCustomerResponse> RegisterCustomerAsync(RegistrationCustomerRequest request);
     }
 }

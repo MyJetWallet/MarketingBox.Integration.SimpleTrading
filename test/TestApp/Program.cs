@@ -19,13 +19,13 @@ namespace TestApp
             var factory = new IntegrationServiceClientFactory("http://localhost:12347");
             var client = factory.GetPartnerService();
 
-            var check = await client.CreateAsync(new LeadCreateRequest()
+            var check = await client.RegisterCustomerAsync(new RegistrationCustomerRequest()
             {
                 TenantId = "test-tenant-id",
             });
 
             var testTenant = "Test-Tenant";
-            var request = new LeadCreateRequest()
+            var request = new RegistrationCustomerRequest()
             {
                 TenantId = testTenant,
             };

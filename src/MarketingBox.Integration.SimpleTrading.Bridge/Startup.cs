@@ -59,7 +59,7 @@ namespace MarketingBox.Integration.SimpleTrading.Bridge
 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapGrpcSchema<IntegrationService, IIntegrationService>();
+                endpoints.MapGrpcSchema<BridgeService, IBridgeService>();
 
                 endpoints.MapGrpcSchemaRegistry();
 

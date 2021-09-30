@@ -11,6 +11,6 @@ namespace MarketingBox.Integration.SimpleTrading.Bridge.Client
         {
         }
 
-        public IIntegrationService GetPartnerService() => CreateGrpcService<IIntegrationService>();
+        public IBridgeService GetPartnerService() => CreateGrpcService<IBridgeService>();
     }
 }

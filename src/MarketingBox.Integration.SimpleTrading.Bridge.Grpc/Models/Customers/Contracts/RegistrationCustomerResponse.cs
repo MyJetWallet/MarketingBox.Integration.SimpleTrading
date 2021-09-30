@@ -1,10 +1,11 @@
 ﻿using System.Runtime.Serialization;
 using MarketingBox.Integration.SimpleTrading.Bridge.Grpc.Models.Common;
+using MarketingBox.Integration.SimpleTrading.Bridge.Grpc.Models.Customers;
 
 namespace MarketingBox.Integration.SimpleTrading.Bridge.Grpc.Models.Leads.Contracts
 {
     [DataContract]
-    public class LeadCreateResponse
+    public class RegistrationCustomerResponse
     {
         [DataMember(Order = 1)]
         public string Status { get; set; }
@@ -13,20 +14,18 @@ namespace MarketingBox.Integration.SimpleTrading.Bridge.Grpc.Models.Leads.Contra
         public string Message { get; set; }
 
         [DataMember(Order = 3)]
-        public LeadBrandRegistrationInfo RegistrationInfo { get; set; }
+        public RegistrationCustomerInfo RegistrationInfo { get; set; }
 
         [DataMember(Order = 4)]
         public string FallbackUrl { get; set; }
 
-        [DataMember(Order = 5)]
-        public LeadGeneralInfo OriginalData { get; set; }
 
         [DataMember(Order = 100)]
         public Error Error { get; set; }
 
-        public static LeadCreateResponse Successfully(LeadBrandRegistrationInfo brandRegistrationInfo)
+        public static RegistrationCustomerResponse Successfully(RegistrationCustomerInfo brandRegistrationInfo)
         {
-            return new LeadCreateResponse()
+            return new RegistrationCustomerResponse()
             {
                 Status = "successful",
                 Message = brandRegistrationInfo.LoginUrl,
@@ -34,14 +33,13 @@ namespace MarketingBox.Integration.SimpleTrading.Bridge.Grpc.Models.Leads.Contra
             };
         }
 
-        public static LeadCreateResponse Failed(Error error, LeadGeneralInfo originalData)
+        public static RegistrationCustomerResponse Failed(Error error)
         {
-            return new LeadCreateResponse()
+            return new RegistrationCustomerResponse()
             {
                 Status = "failed",
                 Message = error.Message,
-                Error = error,
-                OriginalData = originalData
+                Error = error
             };
         }
     }
