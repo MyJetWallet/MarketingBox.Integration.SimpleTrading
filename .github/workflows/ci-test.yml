@@ -55,10 +55,10 @@ jobs:
         password: ${{ secrets.ST_DOCKER_PASSWORD }}
         path: ./publish-api
         registry: simpletrading.azurecr.io
-        repository: marketingbox/marketingbox.integration-simpletrading-bridge-test
+        repository: marketingbox/marketingbox.integration.simpletrading-bridge-test
         tags: latest
         add_git_labels: true
-        build_args: app_version=marketingbox.integration-simpletrading-bridge-test:latest,app_compilation_date=${{ steps.current-time.outputs.formattedTime }}
+        build_args: app_version=marketingbox.integration.simpletrading-bridge-test:latest,app_compilation_date=${{ steps.current-time.outputs.formattedTime }}
 
   restart:
     runs-on: ubuntu-latest    
