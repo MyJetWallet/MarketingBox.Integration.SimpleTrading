@@ -14,7 +14,7 @@ namespace MarketingBox.Integration.SimpleTrading.Bridge
 {
     public class Program
     {
-        public const string SettingsFileName = ".marketingboxintegrationservice";
+        public const string SettingsFileName = ".marketingboxintegrationsimpletradingbridge";
 
         public static SettingsModel Settings { get; private set; }
 
@@ -32,11 +32,11 @@ namespace MarketingBox.Integration.SimpleTrading.Bridge
 
         public static void Main(string[] args)
         {
-            Console.Title = "MarketingBox.Integration.Service";
+            Console.Title = "MarketingBox.Integration.SimpleTrading.Bridge";
 
             Settings = SettingsReader.GetSettings<SettingsModel>(SettingsFileName);
 
-            using var loggerFactory = LogConfigurator.ConfigureElk("MarketingBox.Integration.Service",
+            using var loggerFactory = LogConfigurator.ConfigureElk("MarketingBox.Integration.SimpleTrading.Bridge",
                 Settings.SeqServiceUrl,
                 Settings.ElkLogs);
 
