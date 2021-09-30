@@ -10,13 +10,12 @@ namespace MarketingBox.Integration.SimpleTrading.Bridge
     {
         private readonly ILogger<ApplicationLifetimeManager> _logger;
         private readonly MyServiceBusTcpClient _myServiceBusTcpClient;
-        private readonly MyNoSqlClientLifeTime _myNoSqlClientLifeTime;
+        //private readonly MyNoSqlClientLifeTime _myNoSqlClientLifeTime;
 
         public ApplicationLifetimeManager(
             IHostApplicationLifetime appLifetime, 
             ILogger<ApplicationLifetimeManager> logger,
-            MyServiceBusTcpClient myServiceBusTcpClient,
-            MyNoSqlClientLifeTime myNoSqlClientLifeTime)
+            MyServiceBusTcpClient myServiceBusTcpClient)
             : base(appLifetime)
         {
             _logger = logger;
@@ -28,14 +27,14 @@ namespace MarketingBox.Integration.SimpleTrading.Bridge
         {
             _logger.LogInformation("OnStarted has been called.");
             _myServiceBusTcpClient.Start();
-            _myNoSqlClientLifeTime.Start();
+            //_myNoSqlClientLifeTime.Start();
         }
 
         protected override void OnStopping()
         {
             _logger.LogInformation("OnStopping has been called.");
             _myServiceBusTcpClient.Stop();
-            _myNoSqlClientLifeTime.Stop();
+            //_myNoSqlClientLifeTime.Stop();
         }
 
         protected override void OnStopped()
