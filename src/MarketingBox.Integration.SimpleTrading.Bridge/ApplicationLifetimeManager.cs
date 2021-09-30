@@ -20,7 +20,7 @@ namespace MarketingBox.Integration.SimpleTrading.Bridge
         {
             _logger = logger;
             _myServiceBusTcpClient = myServiceBusTcpClient;
-            _myNoSqlClientLifeTime = myNoSqlClientLifeTime;
+            //_myNoSqlClientLifeTime = myNoSqlClientLifeTime;
         }
 
         protected override void OnStarted()
