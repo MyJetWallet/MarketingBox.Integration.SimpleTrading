@@ -16,7 +16,7 @@ namespace TestApp
             Console.Write("Press enter to start");
             Console.ReadLine();
 
-            var factory = new IntegrationServiceClientFactory("http://localhost:12347");
+            var factory = new SimpleTradingBridgeClientFactory("http://localhost:12347");
             var client = factory.GetPartnerService();
 
             var check = await client.RegisterCustomerAsync(new RegistrationCustomerRequest()

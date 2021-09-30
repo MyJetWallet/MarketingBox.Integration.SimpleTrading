@@ -5,9 +5,9 @@ using MyJetWallet.Sdk.Grpc;
 namespace MarketingBox.Integration.SimpleTrading.Bridge.Client
 {
     [UsedImplicitly]
-    public class IntegrationServiceClientFactory: MyGrpcClientFactory
+    public class SimpleTradingBridgeClientFactory: MyGrpcClientFactory
     {
-        public IntegrationServiceClientFactory(string grpcServiceUrl) : base(grpcServiceUrl)
+        public SimpleTradingBridgeClientFactory(string grpcServiceUrl) : base(grpcServiceUrl)
         {
         }
 

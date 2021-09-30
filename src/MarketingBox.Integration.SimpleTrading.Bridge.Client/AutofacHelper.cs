@@ -7,9 +7,9 @@ namespace MarketingBox.Integration.SimpleTrading.Bridge.Client
 {
     public static class AutofacHelper
     {
-        public static void RegisterIntegrationServiceClient(this ContainerBuilder builder, string grpcServiceUrl)
+        public static void RegisterSimpleTradingBridgeClient(this ContainerBuilder builder, string grpcServiceUrl)
         {
-            var factory = new IntegrationServiceClientFactory(grpcServiceUrl);
+            var factory = new SimpleTradingBridgeClientFactory(grpcServiceUrl);
 
             builder.RegisterInstance(factory.GetPartnerService()).As<IBridgeService>().SingleInstance();
         }
