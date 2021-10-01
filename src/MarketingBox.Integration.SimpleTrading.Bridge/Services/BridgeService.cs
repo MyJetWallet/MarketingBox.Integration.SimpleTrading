@@ -18,17 +18,17 @@ namespace MarketingBox.Integration.SimpleTrading.Bridge.Services
     public class BridgeService : IBridgeService
     {
         private readonly ILogger<BridgeService> _logger;
-        private readonly DbContextOptionsBuilder<DatabaseContext> _dbContextOptionsBuilder;
+        //private readonly DbContextOptionsBuilder<DatabaseContext> _dbContextOptionsBuilder;
         private readonly IPublisher<DepositUpdateMessage> _publisherLeadUpdated;
         private readonly IMyNoSqlServerDataWriter<LeadNoSql> _myNoSqlServerDataWriter;
 
         public BridgeService(ILogger<BridgeService> logger,
-            DbContextOptionsBuilder<DatabaseContext> dbContextOptionsBuilder,
+            //DbContextOptionsBuilder<DatabaseContext> dbContextOptionsBuilder,
             IPublisher<DepositUpdateMessage> publisherLeadUpdated,
             IMyNoSqlServerDataWriter<LeadNoSql> myNoSqlServerDataWriter)
         {
             _logger = logger;
-            _dbContextOptionsBuilder = dbContextOptionsBuilder;
+            //_dbContextOptionsBuilder = dbContextOptionsBuilder;
             _publisherLeadUpdated = publisherLeadUpdated;
             _myNoSqlServerDataWriter = myNoSqlServerDataWriter;
         }
@@ -36,7 +36,7 @@ namespace MarketingBox.Integration.SimpleTrading.Bridge.Services
         public async Task<RegistrationCustomerResponse> RegisterCustomerAsync(RegistrationCustomerRequest request)
         {
             _logger.LogInformation("Creating new LeadInfo {@context}", request);
-            using var ctx = new DatabaseContext(_dbContextOptionsBuilder.Options);
+            //using var ctx = new DatabaseContext(_dbContextOptionsBuilder.Options);
 
             try
             {
@@ -52,7 +52,7 @@ namespace MarketingBox.Integration.SimpleTrading.Bridge.Services
             }
         }
 
-        public async Task<RegistrationCustomerResponse> BrandRegisterAsync(RegistrationCustomerRequest leadEntity)
+        public async Task<RegistrationCustomerResponse> BrandRegisterAsync(RegistrationCustomerRequest customer)
         {
             string brandLoginUrl = @"https://trading-test.handelpro.biz/lpLogin/6DB5D4818181B806DBF7B19EBDC5FD97F1B82759077317B6481BC883F071783DBEF568426B81DF43044E326C26437E097F21A2484110D13420E9EC6E44A1B2BE?lang=PL";
             string brandName = "Monfex";
