@@ -1,8 +1,7 @@
 ﻿using System.Runtime.Serialization;
 using MarketingBox.Integration.SimpleTrading.Bridge.Grpc.Models.Common;
-using MarketingBox.Integration.SimpleTrading.Bridge.Grpc.Models.Customers;
 
-namespace MarketingBox.Integration.SimpleTrading.Bridge.Grpc.Models.Leads.Contracts
+namespace MarketingBox.Integration.SimpleTrading.Bridge.Grpc.Models.Customers.Contracts
 {
     [DataContract]
     public class RegistrationCustomerResponse
@@ -22,25 +21,5 @@ namespace MarketingBox.Integration.SimpleTrading.Bridge.Grpc.Models.Leads.Contra
 
         [DataMember(Order = 100)]
         public Error Error { get; set; }
-
-        public static RegistrationCustomerResponse Successfully(RegistrationCustomerInfo brandRegistrationInfo)
-        {
-            return new RegistrationCustomerResponse()
-            {
-                Status = "successful",
-                Message = brandRegistrationInfo.LoginUrl,
-                RegistrationInfo = brandRegistrationInfo
-            };
-        }
-
-        public static RegistrationCustomerResponse Failed(Error error)
-        {
-            return new RegistrationCustomerResponse()
-            {
-                Status = "failed",
-                Message = error.Message,
-                Error = error
-            };
-        }
     }
 }

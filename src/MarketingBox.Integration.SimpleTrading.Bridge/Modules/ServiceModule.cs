@@ -1,8 +1,8 @@
 ﻿using Autofac;
-using MarketingBox.Integration.SimpleTrading.Bridge.Messages;
 using MarketingBox.Integration.SimpleTrading.Bridge.Messages.Deposits;
 using MarketingBox.Integration.SimpleTrading.Bridge.MyNoSql.Leads;
 using MarketingBox.Integration.SimpleTrading.Bridge.Service.Messages;
+using MarketingBox.Integration.SimpleTrading.Bridge.Services.Integrations;
 using MyJetWallet.Sdk.NoSql;
 using MyJetWallet.Sdk.Service;
 using MyJetWallet.Sdk.ServiceBus;
@@ -30,8 +30,12 @@ namespace MarketingBox.Integration.SimpleTrading.Bridge.Modules
 
             // register writer (IMyNoSqlServerDataWriter<LeadNoSql>)
             builder.RegisterMyNoSqlWriter<LeadNoSql>(Program.ReloadedSettings(e => e.MyNoSqlWriterUrl), LeadNoSql.TableName);
-            
+
             #endregion
+            builder.RegisterType<SimpleTradingHttpClient>()
+                .As<ISimpleTradingHttpClient>()
+                .WithParameter("baseUrl", Program.ReloadedSettings(e => e.BrandUrl).Invoke())
+                .SingleInstance();
         }
     }
 }

@@ -35,6 +35,10 @@ namespace MarketingBox.Integration.SimpleTrading.Bridge.Settings
         [YamlProperty("MarketingBoxIntegrationSimpleTradingBridge.Brand.AffiliateId")]
         public string BrandAffiliateId { get; set; }
 
+        [YamlProperty("MarketingBoxIntegrationSimpleTradingBridge.Brand.BrandId")]
+        public string BrandBrandId { get; set; }
+
+
         [YamlProperty("MarketingBoxIntegrationSimpleTradingBridge.Brand.AffiliateKey")]
         public string BrandAffiliateKey { get; set; }
     }
