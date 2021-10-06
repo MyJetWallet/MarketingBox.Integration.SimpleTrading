@@ -118,7 +118,11 @@ namespace MarketingBox.Integration.SimpleTrading.Bridge.Services
             {
                 _logger.LogError(e, "Error creating lead {@context}", request);
 
-                return new RegistrationCustomerResponse() { Error = new Error() { Message = "Internal error", Type = RegisterErrorType.Unknown } };
+                return FailedMapToGrpc(new Error()
+                {
+                    Message = "Brand response parse error",
+                    Type = RegisterErrorType.Unknown
+                });
             }
         }
 
