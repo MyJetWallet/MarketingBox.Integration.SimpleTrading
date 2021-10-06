@@ -1,10 +1,9 @@
 ﻿namespace MarketingBox.Integration.SimpleTrading.Bridge.Grpc.Models.Common
 {
-    public enum ErrorType
+    public enum RegisterErrorType
     {
         Unknown = 0,
         InvalidParameter = 1,
         RegistrationAlreadyExist = 2,
-
     }
 }

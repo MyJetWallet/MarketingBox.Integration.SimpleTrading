@@ -6,7 +6,7 @@ namespace MarketingBox.Integration.SimpleTrading.Bridge.Grpc.Models.Common
     public class Error 
     {
         [DataMember(Order = 1)]
-        public ErrorType Type { get; set; }
+        public RegisterErrorType Type { get; set; }
 
         [DataMember(Order = 2)]
         public string Message { get; set; }

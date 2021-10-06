@@ -14,12 +14,12 @@ using Microsoft.Extensions.Logging;
 
 namespace MarketingBox.Integration.SimpleTrading.Bridge.Services
 {
-    public class BridgeService : IBridgeService
+    public class RegisterService : IRegisterService
     {
-        private readonly ILogger<BridgeService> _logger;
+        private readonly ILogger<RegisterService> _logger;
         private readonly ISimpleTradingHttpClient _simpleTradingHttpClient;
 
-        public BridgeService(ILogger<BridgeService> logger,
+        public RegisterService(ILogger<RegisterService> logger,
             ISimpleTradingHttpClient simpleTradingHttpClient)
         {
             _logger = logger;
@@ -55,7 +55,7 @@ namespace MarketingBox.Integration.SimpleTrading.Bridge.Services
                     return FailedMapToGrpc(new Error()
                     {
                         Message = registerResult.FailedResult.Message,
-                        Type = ErrorType.Unknown
+                        Type = RegisterErrorType.Unknown
                     });
                 }
 
@@ -73,7 +73,7 @@ namespace MarketingBox.Integration.SimpleTrading.Bridge.Services
                     return FailedMapToGrpc(new Error()
                     {
                         Message = "Registration already exists",
-                        Type = ErrorType.RegistrationAlreadyExist
+                        Type = RegisterErrorType.RegistrationAlreadyExist
                     });
                 }
 
@@ -83,7 +83,7 @@ namespace MarketingBox.Integration.SimpleTrading.Bridge.Services
                     return FailedMapToGrpc(new Error()
                     {
                         Message = "Invalid username or password",
-                        Type = ErrorType.InvalidParameter
+                        Type = RegisterErrorType.InvalidParameter
                     });
                 }
 
@@ -93,7 +93,7 @@ namespace MarketingBox.Integration.SimpleTrading.Bridge.Services
                     return FailedMapToGrpc(new Error()
                     {
                         Message = "Registration data not valid",
-                        Type = ErrorType.InvalidParameter
+                        Type = RegisterErrorType.InvalidParameter
                     });
                 }
 
@@ -103,14 +103,14 @@ namespace MarketingBox.Integration.SimpleTrading.Bridge.Services
                     return FailedMapToGrpc(new Error()
                     {
                         Message = "Brand Error",
-                        Type = ErrorType.Unknown
+                        Type = RegisterErrorType.Unknown
                     });
                 }
 
                 return FailedMapToGrpc(new Error()
                 {
                     Message = "Unknown Error",
-                    Type = ErrorType.Unknown
+                    Type = RegisterErrorType.Unknown
                 });
 
             }
@@ -118,7 +118,7 @@ namespace MarketingBox.Integration.SimpleTrading.Bridge.Services
             {
                 _logger.LogError(e, "Error creating lead {@context}", request);
 
-                return new RegistrationCustomerResponse() { Error = new Error() { Message = "Internal error", Type = ErrorType.Unknown } };
+                return new RegistrationCustomerResponse() { Error = new Error() { Message = "Internal error", Type = RegisterErrorType.Unknown } };
             }
         }
 
@@ -146,40 +146,5 @@ namespace MarketingBox.Integration.SimpleTrading.Bridge.Services
                 Error = error
             };
         }
-
-        //private static Random random = new Random();
-        //public static string RandomString(int length)
-        //{
-        //    const string chars = "123456789";
-        //    return new string(Enumerable.Repeat(chars, length)
-        //        .Select(s => s[random.Next(s.Length)]).ToArray());
-        //}
-
-        //public async Task<RegistrationCustomerResponse> BrandRegisterAsync(RegistrationCustomerRequest customer)
-        //{
-        //    string brandLoginUrl = @"https://trading-test.handelpro.biz/lpLogin/6DB5D4818181B806DBF7B19EBDC5FD97F1B82759077317B6481BC883F071783DBEF568426B81DF43044E326C26437E097F21A2484110D13420E9EC6E44A1B2BE?lang=PL";
-        //    string brandName = "Monfex";
-        //    string brandCustomerId = "02537c06cab34f62931c263bf3480" + RandomString(5);
-        //    string customerEmail = "yuriy.test.2020.09.22.01@mailinator.com";
-        //    string brandToken = "6DB5D4818181B806DBF7B19EBDC5FD97F1B82759077317B6481BC883F071783DBEF568426B81DF43044E326C26437E097F21A2484110D13420E9EC6E44A1B2BE";
-
-
-
-        //    var brandInfo = new RegistrationCustomerResponse()
-        //    {
-        //        Status = "successful",
-        //        Error = null,
-        //        FallbackUrl = "",
-        //        Message = brandLoginUrl,
-        //        RegistrationInfo = new RegistrationCustomerInfo()
-        //        {
-        //            LoginUrl = brandLoginUrl,
-        //            CustomerId = brandCustomerId,
-        //            Token = brandToken,
-        //        }
-        //    };
-        //    await Task.Delay(1000);
-        //    return brandInfo;
-        //}
     }
 }
