@@ -71,17 +71,6 @@ namespace MarketingBox.Integration.SimpleTrading.Bridge.Services.Integrations.Co
         public string? Target { get; set; }
 
         [JsonProperty("cake")]
-        public IDictionary<string, string> Cake { get; set; }
+        public IDictionary<string, string>? Cake { get; set; }
     }
-
-
-    //public class CertusFinanceInvoiceRequestOrderDetail
-    //{
-    //    [JsonProperty("ItemList")] public CertusFinanceInvoiceRequestOrderDetailItemList[] ItemList { get; set; }
-    //}
-
-    //public class CertusFinanceInvoiceRequestOrderDetailItemList
-    //{
-    //    [JsonProperty("itemName")] public string ItemName { get; set; }
-    //}
 }
