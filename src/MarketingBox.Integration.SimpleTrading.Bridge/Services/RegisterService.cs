@@ -1,6 +1,9 @@
 ﻿using System;
+using System.ComponentModel;
 using System.Linq;
+using System.Reflection;
 using System.Threading.Tasks;
+using MarketingBox.Integration.SimpleTrading.Bridge.Domain.Extensions;
 using MarketingBox.Integration.SimpleTrading.Bridge.Grpc;
 using MarketingBox.Integration.SimpleTrading.Bridge.Grpc.Models.Common;
 using MarketingBox.Integration.SimpleTrading.Bridge.Grpc.Models.Customers;
@@ -55,8 +58,8 @@ namespace MarketingBox.Integration.SimpleTrading.Bridge.Services
                     return FailedMapToGrpc(new Error()
                     {
                         Message = registerResult.FailedResult.Message,
-                        Type = RegisterErrorType.Unknown
-                    });
+                        Type = ErrorType.Unknown
+                    }, RegistrationResultCode.Failed);
                 }
 
                 // Success
@@ -73,8 +76,8 @@ namespace MarketingBox.Integration.SimpleTrading.Bridge.Services
                     return FailedMapToGrpc(new Error()
                     {
                         Message = "Registration already exists",
-                        Type = RegisterErrorType.RegistrationAlreadyExist
-                    });
+                        Type = ErrorType.AlreadyExist
+                    }, RegistrationResultCode.Failed);
                 }
 
                 if ((SimpleTradingResultCode)registerResult.SuccessResult.Status ==
@@ -83,8 +86,8 @@ namespace MarketingBox.Integration.SimpleTrading.Bridge.Services
                     return FailedMapToGrpc(new Error()
                     {
                         Message = "Invalid username or password",
-                        Type = RegisterErrorType.InvalidParameter
-                    });
+                        Type = ErrorType.InvalidUserNameOrPassword
+                    }, RegistrationResultCode.Failed);
                 }
 
                 if ((SimpleTradingResultCode)registerResult.SuccessResult.Status ==
@@ -93,8 +96,8 @@ namespace MarketingBox.Integration.SimpleTrading.Bridge.Services
                     return FailedMapToGrpc(new Error()
                     {
                         Message = "Registration data not valid",
-                        Type = RegisterErrorType.InvalidParameter
-                    });
+                        Type = ErrorType.InvalidPersonalData
+                    }, RegistrationResultCode.Failed);
                 }
 
                 if ((SimpleTradingResultCode)registerResult.SuccessResult.Status ==
@@ -103,15 +106,15 @@ namespace MarketingBox.Integration.SimpleTrading.Bridge.Services
                     return FailedMapToGrpc(new Error()
                     {
                         Message = "Brand Error",
-                        Type = RegisterErrorType.Unknown
-                    });
+                        Type = ErrorType.Unknown
+                    }, RegistrationResultCode.Failed);
                 }
 
                 return FailedMapToGrpc(new Error()
                 {
                     Message = "Unknown Error",
-                    Type = RegisterErrorType.Unknown
-                });
+                    Type = ErrorType.Unknown
+                }, RegistrationResultCode.Failed);
 
             }
             catch (Exception e)
@@ -121,8 +124,8 @@ namespace MarketingBox.Integration.SimpleTrading.Bridge.Services
                 return FailedMapToGrpc(new Error()
                 {
                     Message = "Brand response parse error",
-                    Type = RegisterErrorType.Unknown
-                });
+                    Type = ErrorType.Unknown
+                }, RegistrationResultCode.Failed);
             }
         }
 
@@ -130,8 +133,8 @@ namespace MarketingBox.Integration.SimpleTrading.Bridge.Services
         {
             return new RegistrationCustomerResponse()
             {
-                Status = "successful",
-                Message = brandRegistrationInfo.RedirectUrl,
+                ResultCode = RegistrationResultCode.CompletedSuccessfully.ToString(),
+                ResultMessage = EnumExtensions.GetDescription((RegistrationResultCode)RegistrationResultCode.CompletedSuccessfully),
                 RegistrationInfo = new RegistrationCustomerInfo()
                 {
                     CustomerId = brandRegistrationInfo.TraderId,
@@ -141,12 +144,12 @@ namespace MarketingBox.Integration.SimpleTrading.Bridge.Services
             };
         }
 
-        public static RegistrationCustomerResponse FailedMapToGrpc(Error error)
+        public static RegistrationCustomerResponse FailedMapToGrpc(Error error, RegistrationResultCode code)
         {
             return new RegistrationCustomerResponse()
             {
-                Status = "failed",
-                Message = error.Message,
+                ResultCode = code.ToString(),
+                ResultMessage = EnumExtensions.GetDescription((RegistrationResultCode)code),
                 Error = error
             };
         }
