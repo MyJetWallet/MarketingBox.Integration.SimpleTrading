@@ -7,17 +7,13 @@ namespace MarketingBox.Integration.SimpleTrading.Bridge.Grpc.Models.Customers.Co
     public class RegistrationCustomerResponse
     {
         [DataMember(Order = 1)]
-        public string Status { get; set; }
+        public string ResultCode { get; set; }
 
         [DataMember(Order = 2)]
-        public string Message { get; set; }
+        public string ResultMessage { get; set; }
 
         [DataMember(Order = 3)]
         public RegistrationCustomerInfo RegistrationInfo { get; set; }
-
-        [DataMember(Order = 4)]
-        public string FallbackUrl { get; set; }
-
 
         [DataMember(Order = 100)]
         public Error Error { get; set; }
