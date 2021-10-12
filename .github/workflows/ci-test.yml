@@ -58,25 +58,25 @@ jobs:
         repository: marketingbox/marketingbox.integration.simpletrading-bridge-test
         tags: latest
         add_git_labels: true
-        build_args: app_version=marketingbox.integration.simpletrading-bridge-test:latest,app_compilation_date=${{ steps.current-time.outputs.formattedTime }}
+        build_args: app_version=marketingbox-integration-simpletrading-bridge-test:latest,app_compilation_date=${{ steps.current-time.outputs.formattedTime }}
 
   restart:
     runs-on: self-hosted
     needs: build
     steps:
-    - name: Restart service
+    - name: Restart monfex service
       uses: Myjetwallet/kube-restart-pods@master
       env:
         KUBE_CONFIG_DATA: ${{ secrets.KUBE_CONFIG_DATA__ST_TEST }}
         NAMESPACE: marketing-box
         POD: marketing-box-integration-simpletrading-bridge-monfex
-    - name: Restart service
+    - name: Restart handelpro service
       uses: Myjetwallet/kube-restart-pods@master
       env:
         KUBE_CONFIG_DATA: ${{ secrets.KUBE_CONFIG_DATA__ST_TEST }}
         NAMESPACE: marketing-box
         POD: marketing-box-integration-simpletrading-bridge-handelpro
-    - name: Restart service
+    - name: Restart allianzmarket service
       uses: Myjetwallet/kube-restart-pods@master
       env:
         KUBE_CONFIG_DATA: ${{ secrets.KUBE_CONFIG_DATA__ST_TEST }}
