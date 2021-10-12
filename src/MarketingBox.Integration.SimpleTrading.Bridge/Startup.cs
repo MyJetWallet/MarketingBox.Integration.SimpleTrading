@@ -2,7 +2,6 @@
 using Autofac;
 using MarketingBox.Integration.Service.Grpc;
 using MarketingBox.Integration.SimpleTrading.Bridge.Modules;
-using MarketingBox.Integration.SimpleTrading.Bridge.Postgres;
 using MarketingBox.Integration.SimpleTrading.Bridge.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -32,12 +31,12 @@ namespace MarketingBox.Integration.SimpleTrading.Bridge
 
             services.AddHostedService<ApplicationLifetimeManager>();
 
-            DatabaseContext.LoggerFactory = Program.LogFactory;
+            //DatabaseContext.LoggerFactory = Program.LogFactory;
             //services.AddDatabase(DatabaseContext.Schema, 
             //    Program.Settings.PostgresConnectionString, 
             //    o => new DatabaseContext(o));
             
-            DatabaseContext.LoggerFactory = null;
+            //DatabaseContext.LoggerFactory = null;
 
             services.AddMyTelemetry("SP-", Program.Settings.ZipkinUrl);
         }

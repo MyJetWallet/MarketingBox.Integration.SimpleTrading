@@ -22,10 +22,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\MarketingBox.Integration.SimpleTrading.Bridge.Domain\MarketingBox.Integration.SimpleTrading.Bridge.Domain.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
+    <Folder Include="DesignTime\" />
+    <Folder Include="Entities\" />
     <Folder Include="Migrations\" />
   </ItemGroup>
 

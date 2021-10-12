@@ -10,6 +10,7 @@
     <PackageReference Include="Autofac.Extensions.DependencyInjection" Version="7.1.0" />
     <PackageReference Include="Grpc.AspNetCore" Version="2.40.0" />
     <PackageReference Include="JetBrains.Annotations" Version="2021.2.0" />
+    <PackageReference Include="MarketingBox.Integration.Bridge.Client" Version="1.0.2" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="5.0.10" />
     <PackageReference Include="Microsoft.Extensions.Configuration" Version="5.0.0" />
     <PackageReference Include="Microsoft.Extensions.Logging" Version="5.0.0" />
@@ -35,15 +36,6 @@
     <ProjectReference Include="..\MarketingBox.Integration.SimpleTrading.Bridge.Domain\MarketingBox.Integration.SimpleTrading.Bridge.Domain.csproj" />
     <ProjectReference Include="..\MarketingBox.Integration.SimpleTrading.Bridge.MyNoSql\MarketingBox.Integration.SimpleTrading.Bridge.MyNoSql.csproj" />
     <ProjectReference Include="..\MarketingBox.Integration.SimpleTrading.Bridge.ServiceBus\MarketingBox.Integration.SimpleTrading.Bridge.Messages.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Reference Include="MarketingBox.Integration.Bridge.Client">
-      <HintPath>..\..\..\MarketingBox.Integration.Service\src\MarketingBox.Integration.Bridge.Client\bin\Debug\net5.0\MarketingBox.Integration.Bridge.Client.dll</HintPath>
-    </Reference>
-    <Reference Include="MarketingBox.Integration.Service.Grpc">
-      <HintPath>..\..\..\MarketingBox.Integration.Service\src\MarketingBox.Integration.Bridge.Client\bin\Debug\net5.0\MarketingBox.Integration.Service.Grpc.dll</HintPath>
-    </Reference>
   </ItemGroup>
 
   <ItemGroup>

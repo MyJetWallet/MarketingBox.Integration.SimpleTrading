@@ -10,8 +10,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Models\Common\" />
-    <Folder Include="Models\Customers\" />
+    <Folder Include="Models\" />
   </ItemGroup>
 
   <PropertyGroup>

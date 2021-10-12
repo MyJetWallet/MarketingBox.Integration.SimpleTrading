@@ -1,7 +1,4 @@
 ﻿using Autofac;
-using MarketingBox.Integration.SimpleTrading.Bridge.Messages.Deposits;
-using MarketingBox.Integration.SimpleTrading.Bridge.MyNoSql.Leads;
-using MarketingBox.Integration.SimpleTrading.Bridge.Service.Messages;
 using MarketingBox.Integration.SimpleTrading.Bridge.Services.Integrations;
 using MyJetWallet.Sdk.NoSql;
 using MyJetWallet.Sdk.Service;
@@ -23,13 +20,13 @@ namespace MarketingBox.Integration.SimpleTrading.Bridge.Modules
             #region Leads
 
             // publisher (IPublisher<DepositUpdateMessage>)
-            builder.RegisterMyServiceBusPublisher<DepositUpdateMessage>(serviceBusClient, Topics.LeadDepositUpdateTopic, false);
+            //builder.RegisterMyServiceBusPublisher<DepositUpdateMessage>(serviceBusClient, Topics.LeadDepositUpdateTopic, false);
 
             // publisher (IPublisher<PartnerRemoved>)
             //builder.RegisterMyServiceBusPublisher<PartnerRemoved>(serviceBusClient, Topics.LeadUpdatedTopic, false);
 
             // register writer (IMyNoSqlServerDataWriter<LeadNoSql>)
-            builder.RegisterMyNoSqlWriter<LeadNoSql>(Program.ReloadedSettings(e => e.MyNoSqlWriterUrl), LeadNoSql.TableName);
+            //builder.RegisterMyNoSqlWriter<LeadNoSql>(Program.ReloadedSettings(e => e.MyNoSqlWriterUrl), LeadNoSql.TableName);
 
             #endregion
             builder.RegisterType<SimpleTradingHttpClient>()

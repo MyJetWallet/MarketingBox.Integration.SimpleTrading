@@ -7,17 +7,9 @@
 
   <ItemGroup>
     <PackageReference Include="Grpc.Net.Client" Version="2.40.0" />
+    <PackageReference Include="MarketingBox.Integration.Bridge.Client" Version="1.0.2" />
     <PackageReference Include="MyJetWallet.Sdk.Grpc" Version="1.0.5" />
     <PackageReference Include="protobuf-net.Grpc" Version="1.0.152" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Reference Include="MarketingBox.Integration.Bridge.Client">
-      <HintPath>..\..\..\MarketingBox.Integration.Service\src\MarketingBox.Integration.Bridge.Client\bin\Debug\net5.0\MarketingBox.Integration.Bridge.Client.dll</HintPath>
-    </Reference>
-    <Reference Include="MarketingBox.Integration.Service.Grpc">
-      <HintPath>..\..\..\MarketingBox.Integration.Service\src\MarketingBox.Integration.Bridge.Client\bin\Debug\net5.0\MarketingBox.Integration.Service.Grpc.dll</HintPath>
-    </Reference>
   </ItemGroup>
 
 </Project>
