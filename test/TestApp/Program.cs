@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
-using MarketingBox.Integration.SimpleTrading.Bridge.Client;
-using MarketingBox.Integration.SimpleTrading.Bridge.Grpc.Models.Leads;
-using MarketingBox.Integration.SimpleTrading.Bridge.Grpc.Models.Leads.Contracts;
+using MarketingBox.Integration.Bridge.Client;
+using MarketingBox.Integration.Service.Grpc.Models.Leads.Contracts;
 using ProtoBuf.Grpc.Client;
 
 namespace TestApp
@@ -16,18 +15,18 @@ namespace TestApp
             Console.Write("Press enter to start");
             Console.ReadLine();
 
-            var factory = new SimpleTradingBridgeClientFactory("http://localhost:12347");
-            var client = factory.GetPartnerService();
+            var factory = new BridgeServiceClientFactory("http://localhost:12347");
+            var client = factory.GetBridgeService();
 
-            var check = await client.RegisterCustomerAsync(new RegistrationCustomerRequest()
+            var check = await client.RegisterCustomerAsync(new RegistrationBridgeRequest()
             {
-                TenantId = "test-tenant-id",
+                //TenantId = "test-tenant-id",
             });
 
             var testTenant = "Test-Tenant";
-            var request = new RegistrationCustomerRequest()
+            var request = new RegistrationBridgeRequest()
             {
-                TenantId = testTenant,
+                //TenantId = testTenant,
             };
             //request.GeneralInfo = new LeadGeneralInfo()
             //{

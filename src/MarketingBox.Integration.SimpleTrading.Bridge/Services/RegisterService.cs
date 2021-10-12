@@ -3,12 +3,12 @@ using System.ComponentModel;
 using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
+using MarketingBox.Integration.Service.Grpc;
+using MarketingBox.Integration.Service.Grpc.Models.Common;
+using MarketingBox.Integration.Service.Grpc.Models.Leads;
+using MarketingBox.Integration.Service.Grpc.Models.Leads.Contracts;
+using MarketingBox.Integration.Service.Grpc.Models.Reporting;
 using MarketingBox.Integration.SimpleTrading.Bridge.Domain.Extensions;
-using MarketingBox.Integration.SimpleTrading.Bridge.Grpc;
-using MarketingBox.Integration.SimpleTrading.Bridge.Grpc.Models.Common;
-using MarketingBox.Integration.SimpleTrading.Bridge.Grpc.Models.Customers;
-using MarketingBox.Integration.SimpleTrading.Bridge.Grpc.Models.Customers.Contracts;
-using MarketingBox.Integration.SimpleTrading.Bridge.Grpc.Models.Leads.Contracts;
 using MarketingBox.Integration.SimpleTrading.Bridge.Services.Integrations;
 using MarketingBox.Integration.SimpleTrading.Bridge.Services.Integrations.Contracts.Enums;
 using MarketingBox.Integration.SimpleTrading.Bridge.Services.Integrations.Contracts.Requests;
@@ -17,7 +17,7 @@ using Microsoft.Extensions.Logging;
 
 namespace MarketingBox.Integration.SimpleTrading.Bridge.Services
 {
-    public class RegisterService : IRegisterService
+    public class RegisterService : IBridgeService
     {
         private readonly ILogger<RegisterService> _logger;
         private readonly ISimpleTradingHttpClient _simpleTradingHttpClient;
@@ -29,7 +29,8 @@ namespace MarketingBox.Integration.SimpleTrading.Bridge.Services
             _simpleTradingHttpClient = simpleTradingHttpClient;
         }
 
-        public async Task<RegistrationCustomerResponse> RegisterCustomerAsync(RegistrationCustomerRequest request)
+        public async Task<RegistrationBridgeResponse> RegisterCustomerAsync(
+            RegistrationBridgeRequest request)
         {
             _logger.LogInformation("Creating new LeadInfo {@context}", request);
             try
@@ -59,7 +60,7 @@ namespace MarketingBox.Integration.SimpleTrading.Bridge.Services
                     {
                         Message = registerResult.FailedResult.Message,
                         Type = ErrorType.Unknown
-                    }, RegistrationResultCode.Failed);
+                    }, ResultCode.Failed);
                 }
 
                 // Success
@@ -77,7 +78,7 @@ namespace MarketingBox.Integration.SimpleTrading.Bridge.Services
                     {
                         Message = "Registration already exists",
                         Type = ErrorType.AlreadyExist
-                    }, RegistrationResultCode.Failed);
+                    }, ResultCode.Failed);
                 }
 
                 if ((SimpleTradingResultCode)registerResult.SuccessResult.Status ==
@@ -87,7 +88,7 @@ namespace MarketingBox.Integration.SimpleTrading.Bridge.Services
                     {
                         Message = "Invalid username or password",
                         Type = ErrorType.InvalidUserNameOrPassword
-                    }, RegistrationResultCode.Failed);
+                    }, ResultCode.Failed);
                 }
 
                 if ((SimpleTradingResultCode)registerResult.SuccessResult.Status ==
@@ -97,7 +98,7 @@ namespace MarketingBox.Integration.SimpleTrading.Bridge.Services
                     {
                         Message = "Registration data not valid",
                         Type = ErrorType.InvalidPersonalData
-                    }, RegistrationResultCode.Failed);
+                    }, ResultCode.Failed);
                 }
 
                 if ((SimpleTradingResultCode)registerResult.SuccessResult.Status ==
@@ -107,14 +108,14 @@ namespace MarketingBox.Integration.SimpleTrading.Bridge.Services
                     {
                         Message = "Brand Error",
                         Type = ErrorType.Unknown
-                    }, RegistrationResultCode.Failed);
+                    }, ResultCode.Failed);
                 }
 
                 return FailedMapToGrpc(new Error()
                 {
                     Message = "Unknown Error",
                     Type = ErrorType.Unknown
-                }, RegistrationResultCode.Failed);
+                }, ResultCode.Failed);
 
             }
             catch (Exception e)
@@ -125,17 +126,17 @@ namespace MarketingBox.Integration.SimpleTrading.Bridge.Services
                 {
                     Message = "Brand response parse error",
                     Type = ErrorType.Unknown
-                }, RegistrationResultCode.Failed);
+                }, ResultCode.Failed);
             }
         }
 
-        public static RegistrationCustomerResponse SuccessMapToGrpc(RegisterResponse brandRegistrationInfo)
+        public static RegistrationBridgeResponse SuccessMapToGrpc(RegisterResponse brandRegistrationInfo)
         {
-            return new RegistrationCustomerResponse()
+            return new RegistrationBridgeResponse()
             {
-                ResultCode = RegistrationResultCode.CompletedSuccessfully.ToString(),
-                ResultMessage = EnumExtensions.GetDescription((RegistrationResultCode)RegistrationResultCode.CompletedSuccessfully),
-                RegistrationInfo = new RegistrationCustomerInfo()
+                ResultCode = ResultCode.CompletedSuccessfully,
+                ResultMessage = EnumExtensions.GetDescription((ResultCode)ResultCode.CompletedSuccessfully),
+                RegistrationInfo = new RegisteredLeadInfo()
                 {
                     CustomerId = brandRegistrationInfo.TraderId,
                     LoginUrl = brandRegistrationInfo.RedirectUrl,
@@ -144,14 +145,29 @@ namespace MarketingBox.Integration.SimpleTrading.Bridge.Services
             };
         }
 
-        public static RegistrationCustomerResponse FailedMapToGrpc(Error error, RegistrationResultCode code)
+        public static RegistrationBridgeResponse FailedMapToGrpc(Error error, ResultCode code)
         {
-            return new RegistrationCustomerResponse()
+            return new RegistrationBridgeResponse()
             {
-                ResultCode = code.ToString(),
-                ResultMessage = EnumExtensions.GetDescription((RegistrationResultCode)code),
+                ResultCode = code,
+                ResultMessage = EnumExtensions.GetDescription((ResultCode)code),
                 Error = error
             };
+        }
+
+        public Task<BridgeCountersResponse> GetBridgeCountersPerPeriodAsync(CountersRequest request)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<RegistrationsResponse> GetRegistrationsPerPeriodAsync(RegistrationsRequest request)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<DepositsResponse> GetDepositsPerPeriodAsync(DepositsRequest request)
+        {
+            throw new NotImplementedException();
         }
     }
 }

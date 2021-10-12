@@ -1,6 +1,6 @@
 ﻿using System.Reflection;
 using Autofac;
-using MarketingBox.Integration.SimpleTrading.Bridge.Grpc;
+using MarketingBox.Integration.Service.Grpc;
 using MarketingBox.Integration.SimpleTrading.Bridge.Modules;
 using MarketingBox.Integration.SimpleTrading.Bridge.Postgres;
 using MarketingBox.Integration.SimpleTrading.Bridge.Services;
@@ -59,7 +59,7 @@ namespace MarketingBox.Integration.SimpleTrading.Bridge
 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapGrpcSchema<RegisterService, IRegisterService>();
+                endpoints.MapGrpcSchema<RegisterService, IBridgeService>();
 
                 endpoints.MapGrpcSchemaRegistry();
 

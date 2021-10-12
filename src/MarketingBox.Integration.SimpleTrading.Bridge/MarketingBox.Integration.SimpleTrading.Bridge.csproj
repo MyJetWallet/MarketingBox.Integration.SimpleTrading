@@ -33,9 +33,17 @@
   <ItemGroup>
     <ProjectReference Include="..\MarketingBox.Integration.SimpleTrading.Bridge.Postgres\MarketingBox.Integration.SimpleTrading.Bridge.Postgres.csproj" />
     <ProjectReference Include="..\MarketingBox.Integration.SimpleTrading.Bridge.Domain\MarketingBox.Integration.SimpleTrading.Bridge.Domain.csproj" />
-    <ProjectReference Include="..\MarketingBox.Integration.SimpleTrading.Bridge.Grpc\MarketingBox.Integration.SimpleTrading.Bridge.Grpc.csproj" />
     <ProjectReference Include="..\MarketingBox.Integration.SimpleTrading.Bridge.MyNoSql\MarketingBox.Integration.SimpleTrading.Bridge.MyNoSql.csproj" />
     <ProjectReference Include="..\MarketingBox.Integration.SimpleTrading.Bridge.ServiceBus\MarketingBox.Integration.SimpleTrading.Bridge.Messages.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="MarketingBox.Integration.Bridge.Client">
+      <HintPath>..\..\..\MarketingBox.Integration.Service\src\MarketingBox.Integration.Bridge.Client\bin\Debug\net5.0\MarketingBox.Integration.Bridge.Client.dll</HintPath>
+    </Reference>
+    <Reference Include="MarketingBox.Integration.Service.Grpc">
+      <HintPath>..\..\..\MarketingBox.Integration.Service\src\MarketingBox.Integration.Bridge.Client\bin\Debug\net5.0\MarketingBox.Integration.Service.Grpc.dll</HintPath>
+    </Reference>
   </ItemGroup>
 
   <ItemGroup>
