@@ -12,16 +12,16 @@ jobs:
       env:
         KUBE_CONFIG_DATA: ${{ secrets.KUBE_CONFIG_DATA__ST_TEST }}
         NAMESPACE: marketing-box
-        POD: marketing-box-integration-simpletrading-bridge-monfex
+        POD: marketing-box-integration-bridge-monfex
     - name: Restart Handelpro Bridge
       uses: Myjetwallet/kube-restart-pods@master
       env:
         KUBE_CONFIG_DATA: ${{ secrets.KUBE_CONFIG_DATA__ST_TEST }}
         NAMESPACE: marketing-box
-        POD: marketing-box-integration-simpletrading-bridge-handelpro
+        POD: marketing-box-integration-bridge-handelpro
     - name: Restart Allianzmarket Bridge
       uses: Myjetwallet/kube-restart-pods@master
       env:
         KUBE_CONFIG_DATA: ${{ secrets.KUBE_CONFIG_DATA__ST_TEST }}
         NAMESPACE: marketing-box
-        POD: marketing-box-integration-simpletrading-bridge-allianzmarket
+        POD: marketing-box-integration-bridge-allianzmarket
