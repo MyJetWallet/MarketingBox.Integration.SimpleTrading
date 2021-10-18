@@ -8,13 +8,9 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using MyJetWallet.Sdk.GrpcMetrics;
 using MyJetWallet.Sdk.GrpcSchema;
-using MyJetWallet.Sdk.Postgres;
 using MyJetWallet.Sdk.Service;
 using Prometheus;
-using ProtoBuf.Grpc.Server;
-using SimpleTrading.BaseMetrics;
 using SimpleTrading.ServiceStatusReporterConnector;
 
 namespace MarketingBox.Integration.SimpleTrading.Bridge
@@ -23,20 +19,9 @@ namespace MarketingBox.Integration.SimpleTrading.Bridge
     {
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddCodeFirstGrpc(options =>
-            {
-                options.Interceptors.Add<PrometheusMetricsInterceptor>();
-                options.BindMetricsInterceptors();
-            });
+            services.BindCodeFirstGrpc();
 
             services.AddHostedService<ApplicationLifetimeManager>();
-
-            //DatabaseContext.LoggerFactory = Program.LogFactory;
-            //services.AddDatabase(DatabaseContext.Schema, 
-            //    Program.Settings.PostgresConnectionString, 
-            //    o => new DatabaseContext(o));
-            
-            //DatabaseContext.LoggerFactory = null;
 
             services.AddMyTelemetry("SP-", Program.Settings.ZipkinUrl);
         }
