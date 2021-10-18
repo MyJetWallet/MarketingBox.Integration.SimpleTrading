@@ -1,7 +1,5 @@
 ﻿using Autofac;
 using MarketingBox.Integration.SimpleTrading.Bridge.Services.Integrations;
-using MyJetWallet.Sdk.NoSql;
-using MyJetWallet.Sdk.Service;
 using MyJetWallet.Sdk.ServiceBus;
 
 namespace MarketingBox.Integration.SimpleTrading.Bridge.Modules
@@ -13,7 +11,7 @@ namespace MarketingBox.Integration.SimpleTrading.Bridge.Modules
             var serviceBusClient = builder
                 .RegisterMyServiceBusTcpClient(
                     Program.ReloadedSettings(e => e.MarketingBoxServiceBusHostPort),
-                    ApplicationEnvironment.HostName, Program.LogFactory);
+                    Program.LogFactory);
 
             //var noSqlClient = builder.CreateNoSqlClient(Program.ReloadedSettings(e => e.MyNoSqlReaderHostPort));
 
